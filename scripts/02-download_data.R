@@ -1,11 +1,11 @@
 #### Preamble ####
 # Purpose: Downloads and saves the data from spotify
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Author: Talia, Lexi, Fatimah, Aliza
+# Date: 10 Oct 2024
+# Contact: talia.fabregas@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: NA
+# Any other information needed? NA
 
 
 #### Workspace setup ####
@@ -17,10 +17,14 @@ library(spotifyr)
 
 
 #### Download data ####
-radiohead <- get_artist_audio_features("radiohead")
+nationals <- get_artist_audio_features("the nationals")
+coldplay <- get_artist_audio_features("coldplay")
+
 
 
 #### Save data ####
-saveRDS(radiohead, "radiohead.rds")
+saveRDS(nationals, "data/01-raw_data/nationals_raw.rds")
+saveRDS(coldplay, "data/01-raw_data/coldplay_raw.rds")
+
 
          
