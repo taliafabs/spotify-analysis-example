@@ -20,7 +20,6 @@ library(spotifyr)
 radiohead <- get_artist_audio_features("radiohead")
 
 
-
 #### Save data ####
 saveRDS(radiohead, "radiohead.rds")
 
