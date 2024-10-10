@@ -1,5 +1,5 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data from [...UPDATE THIS...]
+# Purpose: Downloads and saves the data from spotify
 # Author: Rohan Alexander [...UPDATE THIS...]
 # Date: 11 February 2023 [...UPDATE THIS...]
 # Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
@@ -9,18 +9,19 @@
 
 
 #### Workspace setup ####
-library(opendatatoronto)
 library(tidyverse)
-# [...UPDATE THIS...]
+library(janitor)
+library(dplyr)
+library(usethis)
+library(spotifyr)
+
 
 #### Download data ####
-# [...ADD CODE HERE TO DOWNLOAD...]
+radiohead <- get_artist_audio_features("radiohead")
 
 
 
 #### Save data ####
-# [...UPDATE THIS...]
-# change the_raw_data to whatever name you assigned when you downloaded it.
-write_csv(the_raw_data, "inputs/data/raw_data.csv") 
+saveRDS(radiohead, "radiohead.rds")
 
          
