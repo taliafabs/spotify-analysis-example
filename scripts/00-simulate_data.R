@@ -1,11 +1,11 @@
 #### Preamble ####
 # Purpose: Simulates coldplay song and danceability data since 2004
-# Author: Rohan Alexander
-# Date: 26 September 2024
-# Contact: rohan.alexander@utoronto.ca
+# Author: Talia Fabregas, Lexi Knight, Fatimah Yunusa, Aliza Mithwani
+# Date: 21 November 2024
+# Contact: lexi.knight@mail.utoronto.ca
 # License: MIT
 # Pre-requisites: The `tidyverse` package must be installed
-# Any other information needed? Make sure you are in the `starter_folder` rproj
+# Any other information needed? Make sure you are in the `spotify-analysis-example` rproj
 
 
 #### Workspace setup ####
@@ -32,7 +32,7 @@ songs_national <- c(
 )
 
 simulated_coldplay <- tibble(
-  song = songs,
+  song = coldplay_songs,
   duration = round(runif(length(coldplay_songs), min = 180, max = 300)), # Random durations between 3 and 5 minutes
   danceability = round(runif(length(coldplay_songs), min = 1, max = 10), 1), # Danceability scores (1 to 10)
   year = sample(2000:2024, size = length(coldplay_songs), replace = TRUE) # Random release year between 2000 and 2024
