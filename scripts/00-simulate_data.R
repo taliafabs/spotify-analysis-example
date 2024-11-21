@@ -1,6 +1,5 @@
 #### Preamble ####
-# Purpose: Simulates a dataset of Australian electoral divisions, including the 
-  #state and party that won each division.
+# Purpose: Simulates coldplay song and danceability data since 2004
 # Author: Rohan Alexander
 # Date: 26 September 2024
 # Contact: rohan.alexander@utoronto.ca
@@ -15,38 +14,38 @@ set.seed(853)
 
 
 #### Simulate data ####
-# State names
-states <- c(
-  "New South Wales",
-  "Victoria",
-  "Queensland",
-  "South Australia",
-  "Western Australia",
-  "Tasmania",
-  "Northern Territory",
-  "Australian Capital Territory"
+set.seed(304) # For reproducibility
+
+coldplay_songs <- c(
+  "Yellow", "Fix You", "The Scientist", "Clocks", "Viva La Vida", 
+  "Paradise", "A Sky Full of Stars", "Something Just Like This", 
+  "Hymn for the Weekend", "Adventure of a Lifetime", "Shiver", 
+  "Every Teardrop Is a Waterfall", "Speed of Sound", "Magic", 
+  "Higher Power"
 )
 
-# Political parties
-parties <- c("Labor", "Liberal", "Greens", "National", "Other")
+songs_national <- c(
+  "Bloodbuzz Ohio", "Fake Empire", "I Need My Girl", "Sea of Love", 
+  "Terrible Love", "Mr. November", "About Today", "Light Years", 
+  "Mistaken for Strangers", "Conversation 16", "Pink Rabbits", 
+  "England", "Slow Show", "Don't Swallow the Cap", "Graceless"
+)
 
-# Create a dataset by randomly assigning states and parties to divisions
-analysis_data <- tibble(
-  division = paste("Division", 1:151),  # Add "Division" to make it a character
-  state = sample(
-    states,
-    size = 151,
-    replace = TRUE,
-    prob = c(0.25, 0.25, 0.15, 0.1, 0.1, 0.1, 0.025, 0.025) # Rough state population distribution
-  ),
-  party = sample(
-    parties,
-    size = 151,
-    replace = TRUE,
-    prob = c(0.40, 0.40, 0.05, 0.1, 0.05) # Rough party distribution
-  )
+simulated_coldplay <- tibble(
+  song = songs,
+  duration = round(runif(length(coldplay_songs), min = 180, max = 300)), # Random durations between 3 and 5 minutes
+  danceability = round(runif(length(coldplay_songs), min = 1, max = 10), 1), # Danceability scores (1 to 10)
+  year = sample(2000:2024, size = length(coldplay_songs), replace = TRUE) # Random release year between 2000 and 2024
+)
+
+simulated_national <- tibble(
+  song = songs_national,
+  duration = round(runif(length(songs_national), min = 180, max = 360)), # Random durations between 3 and 6 minutes
+  danceability = round(runif(length(songs_national), min = 1, max = 10), 1), # Danceability scores (1 to 10)
+  year = sample(2000:2024, size = length(songs_national), replace = TRUE) # Random release year between 2000 and 2024
 )
 
 
 #### Save data ####
-write_csv(analysis_data, "data/00-simulated_data/simulated_data.csv")
+write_csv(simulated_coldplay, "data/00-simulated_data/simulated_coldplay.csv")
+write_csv(simulated_national, "data/00-simulated_data/simulated_national.csv")
