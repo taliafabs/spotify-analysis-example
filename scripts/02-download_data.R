@@ -11,8 +11,6 @@
 #### Workspace setup ####
 library(tidyverse)
 library(janitor)
-library(dplyr)
-library(usethis)
 library(spotifyr)
 
 
