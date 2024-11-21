@@ -1,44 +1,26 @@
 #### Preamble ####
-# Purpose: Cleans the raw plane data recorded by two observers..... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 6 April 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Cleans the raw Nationals and Coldplay data from Spotify
+# Author: Talia Fabregas, Lexi Knight, Aliza Mithwani, Fatimah Yunusa
+# Date: 21 November 2024
+# Contact: talia.fabregas@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: Run 02-download_data.R first
+# Any other information needed? No
 
 #### Workspace setup ####
 library(tidyverse)
 
 #### Clean data ####
-raw_data <- read_csv("inputs/data/plane_data.csv")
+raw_nationals <- read_rds(here::here("data/01-raw_data/nationals_raw.rds"))
+raw_coldplay <- read_rds(here::here("data/01-raw_data/coldplay_raw.rds"))
 
-cleaned_data <-
-  raw_data |>
-  janitor::clean_names() |>
-  select(wing_width_mm, wing_length_mm, flying_time_sec_first_timer) |>
-  filter(wing_width_mm != "caw") |>
-  mutate(
-    flying_time_sec_first_timer = if_else(flying_time_sec_first_timer == "1,35",
-                                   "1.35",
-                                   flying_time_sec_first_timer)
-  ) |>
-  mutate(wing_width_mm = if_else(wing_width_mm == "490",
-                                 "49",
-                                 wing_width_mm)) |>
-  mutate(wing_width_mm = if_else(wing_width_mm == "6",
-                                 "60",
-                                 wing_width_mm)) |>
-  mutate(
-    wing_width_mm = as.numeric(wing_width_mm),
-    wing_length_mm = as.numeric(wing_length_mm),
-    flying_time_sec_first_timer = as.numeric(flying_time_sec_first_timer)
-  ) |>
-  rename(flying_time = flying_time_sec_first_timer,
-         width = wing_width_mm,
-         length = wing_length_mm
-         ) |> 
-  tidyr::drop_na()
+cleaned_nationals <- as_tibble(raw_nationals) |>
+  select(artist_name, artist_id, album_id, album_release_date, album_release_year, duration_ms, danceability)
+
+cleaned_coldplay <- as_tibble(raw_coldplay) |>
+  select(artist_name, artist_id, album_id, album_release_date, album_release_year, duration_ms, danceability)
+
 
 #### Save data ####
-write_csv(cleaned_data, "outputs/data/analysis_data.csv")
+write_csv(cleaned_nationals, "data/02-analysis_data/cleaned_nationals_data.csv")
+write_csv(cleaned_coldplay, "data/02-analysis_data/cleaned_coldplay.csv")
